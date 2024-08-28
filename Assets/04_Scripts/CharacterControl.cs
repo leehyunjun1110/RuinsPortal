@@ -23,7 +23,7 @@ public class CharacterControl : MonoBehaviour
         // 키 입력에 따라 방향 전환
         HandleInput();
         if (IsGrounded() == true){
-            Debug.Log("왜안돼지");    
+                
         }
     }
 
