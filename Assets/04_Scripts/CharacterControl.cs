@@ -4,6 +4,9 @@ public class CharacterControl : MonoBehaviour
 {
     private IState currentState;
     private Vector3 lastDirection;
+    [SerializeField] private float groundCheckDistance = 0.2f;  // Raycast 길이
+    [SerializeField] private LayerMask groundLayer; // 땅 레이어 마스크
+    [SerializeField] private LayerMask playerLayer; // 땅 레이어 마스크
 
     void Start()
     {
@@ -19,8 +22,6 @@ public class CharacterControl : MonoBehaviour
 
         // 키 입력에 따라 방향 전환
         HandleInput();
-
-        Debug.DrawRay(transform.position, Vector2.down);
         if (IsGrounded() == true){
             Debug.Log("왜안돼지");    
         }
@@ -42,9 +43,13 @@ public class CharacterControl : MonoBehaviour
 
     public bool IsGrounded()
     {
-        // 땅에 닿아있는지 확인하는 로직 (예: Raycast)
-        return Physics2D.Raycast(transform.position, Vector2.down, 0.1f);
-        
+        // 땅에 닿아있는지 확인하는 로직 (Raycast)
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, groundLayer | playerLayer);
+
+        // 디버그: Ray를 그려서 확인
+        Debug.DrawRay(transform.position, Vector2.down * groundCheckDistance, Color.red);
+
+        return hit.collider != null;
     }
 
     private void HandleInput()

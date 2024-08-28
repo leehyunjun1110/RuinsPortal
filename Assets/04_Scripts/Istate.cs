@@ -107,6 +107,8 @@ public class JumpState : IState
     private Rigidbody2D rb;
     private Animator animator;
     private float jumpForce = 7f;
+    private float jumpDuration = 0.5f;  // 점프 애니메이션 지속 시간
+    private float elapsedTime;
 
     public JumpState(GameObject character)
     {
@@ -118,14 +120,24 @@ public class JumpState : IState
     public void Enter()
     {
         Debug.Log("Entering Jump State");
+
+        // 달리기 애니메이션을 중지하고 점프 애니메이션 실행
+        animator.SetBool("isRunning", false);
         animator.SetTrigger("Jump");
+
+        // 캐릭터 점프
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+
+        // 타이머 초기화
+        elapsedTime = 0f;
     }
 
     public void Update()
     {
-        // 캐릭터가 땅에 닿으면 Idle 또는 Run 상태로 전환
-        if (character.GetComponent<CharacterControl>().IsGrounded())
+        elapsedTime += Time.deltaTime;
+
+        // 점프 애니메이션이 일정 시간 동안 재생된 후, 땅에 닿으면 상태 전환
+        if (elapsedTime >= jumpDuration && character.GetComponent<CharacterControl>().IsGrounded())
         {
             if (Input.GetAxis("Horizontal") != 0)
             {
