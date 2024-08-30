@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface IInteractable
-    {
-        string GetText();
-        void Interaction();
-    }
+{
+    string GetText();
+    void Interaction();
+}

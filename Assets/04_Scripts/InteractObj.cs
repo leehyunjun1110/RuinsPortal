@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class InteractObj : MonoBehaviour, IInteractable
 {
-    [SerializeField] private bool isUp;
-    [SerializeField] private bool isDown;
+    private bool isUp = true;
+    private bool isDown = false;
 
     public string GetText()
     {
