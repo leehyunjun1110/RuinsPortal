@@ -52,10 +52,22 @@ public class interact : MonoBehaviour
             if (Time.time - _lastCheckTime >= _checkRate)
             {
                 _lastCheckTime = Time.time;
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, _maxDistance, _layerMask);
-                if (hit.collider != null && !_picked)
+                RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector2.right, _maxDistance, _layerMask);
+                RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left, _maxDistance, _layerMask);
+                if (hitRight.collider != null && !_picked)
                 {
-                    _curObj = hit.collider.gameObject;
+                    _curObj = hitRight.collider.gameObject;
+                    _curInt = _curObj.GetComponent<IInteractable>();
+
+                    if (_curInt != null)
+                    {
+                        _interactable = true;
+                        SetPromptText();
+                    }
+                }
+                else if (hitLeft.collider != null && !_picked)
+                {
+                    _curObj = hitLeft.collider.gameObject;
                     _curInt = _curObj.GetComponent<IInteractable>();
 
                     if (_curInt != null)
@@ -98,6 +110,7 @@ public class interact : MonoBehaviour
                 _pickedObj.transform.SetParent(transform);
             }
 
+            _pickedObj.GetComponent<CircleCollider2D>().isTrigger = true;
             _curObj.SetActive(false);
             _picked = true;
             _intText.gameObject.SetActive(false);

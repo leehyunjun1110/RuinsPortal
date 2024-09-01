@@ -29,7 +29,9 @@ public class Weight : MonoBehaviour, IInteractable
     public string GetText()
     {
         if(isFull)
-        {return "full";}
+        {
+            return "Full";
+        }
         else
         {
             return weight.ToString();
@@ -40,8 +42,7 @@ public class Weight : MonoBehaviour, IInteractable
 
     public void Interaction()
     {
-
-         weight ++;
+        weight ++;
         if(weight >= maxWeight)
         {
             weight = maxWeight;
