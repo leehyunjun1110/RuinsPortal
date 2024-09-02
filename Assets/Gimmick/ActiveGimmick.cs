@@ -23,6 +23,13 @@ public class ActiveGimmick : MonoBehaviour
         }
     }
 
+    public void MoveObjects(Vector2 vc2)
+    {
+        for(int ix = objs.Count - 1; ix >= 0; ix--)
+        {
+            objs[ix].transform.Translate(vc2 * speed * Time.deltaTime);
+        }
+    }
     void OnCollisionEnter2D(Collision2D other)
     {
         bool none = true;
@@ -56,6 +63,41 @@ public class ActiveGimmick : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GameObject[] allobjects = FindObjectsOfType<GameObject>();
+        foreach(GameObject ob in allobjects)
+        {
+            bool none = true;
+            for(int ix = objs.Count - 1; ix >= 0; ix--)
+            {
+                if(objs[ix] == ob.gameObject)
+                {
+                    none = false;
+                }
+            }
+            if(ob.GetComponent<BoxCollider2D>() != null)
+            {
+                if(none == true && ob.transform.position.x + ob.transform.localScale.x * ob.GetComponent<BoxCollider2D>().size.x / 2 >= transform.position.x - transform.localScale.x * GetComponent<BoxCollider2D>().size.x / 2 && ob.transform.position.x - ob.transform.localScale.x * ob.GetComponent<BoxCollider2D>().size.x / 2 <= transform.position.x + transform.localScale.x * GetComponent<BoxCollider2D>().size.x)
+                {
+                    if(ob != gameObject)
+                    {
+                        objs.Add(ob);
+                    }
+                }
+                else if(none == false)
+                {
+                    if(ob.transform.position.x + ob.transform.localScale.x * ob.GetComponent<BoxCollider2D>().size.x / 2 < transform.position.x - transform.localScale.x * GetComponent<BoxCollider2D>().size.x / 2 || ob.transform.position.x - ob.transform.localScale.x * ob.GetComponent<BoxCollider2D>().size.x / 2 > transform.position.x + transform.localScale.x * GetComponent<BoxCollider2D>().size.x)
+                    {
+                        for(int ix = objs.Count - 1; ix >= 0; ix--)
+                        {
+                            if(objs[ix] == ob.gameObject)
+                            {
+                                objs.RemoveAt(ix);
+                            }
+                        }
+                    }
+                }
+            }
+        }
         if(active == true)
         {
             if(trapnumber == 1)
@@ -63,18 +105,12 @@ public class ActiveGimmick : MonoBehaviour
                 if(posi > 0 && transform.position.y < oripos + posi)
                 {
                     transform.Translate(new Vector2(0, 1) * speed * Time.deltaTime);
-                    for(int ix = objs.Count - 1; ix >= 0; ix--)
-                    {
-                        objs[ix].transform.Translate(new Vector2(0, 1) * speed * Time.deltaTime);
-                    }
+                    MoveObjects(new Vector2(0, 1));
                 }
                 else if(posi < 0 && transform.position.y > oripos + posi)
                 {
                     transform.Translate(new Vector2(0, -1) * speed * Time.deltaTime);
-                    for(int ix = objs.Count - 1; ix >= 0; ix--)
-                    {
-                        objs[ix].transform.Translate(new Vector2(0, -1) * speed * Time.deltaTime);
-                    }
+                    MoveObjects(new Vector2(0, -1));
                 }
             }
             else if(trapnumber == 1.5f)
@@ -82,18 +118,12 @@ public class ActiveGimmick : MonoBehaviour
                 if(posi > 0 && transform.position.x < oripos + posi)
                 {
                     transform.Translate(new Vector2(1, 0) * speed * Time.deltaTime);
-                    for(int ix = objs.Count - 1; ix >= 0; ix--)
-                    {
-                        objs[ix].transform.Translate(new Vector2(1, 0) * speed * Time.deltaTime);
-                    }
+                    MoveObjects(new Vector2(1, 0));
                 }
                 else if(posi < 0 && transform.position.x > oripos + posi)
                 {
                     transform.Translate(new Vector2(-1, 0) * speed * Time.deltaTime);
-                    for(int ix = objs.Count - 1; ix >= 0; ix--)
-                    {
-                        objs[ix].transform.Translate(new Vector2(-1, 0) * speed * Time.deltaTime);
-                    }
+                    MoveObjects(new Vector2(-1, 0));
                 }
             }
             else if(trapnumber == 2)
@@ -101,18 +131,12 @@ public class ActiveGimmick : MonoBehaviour
                 if(posi > 0 && transform.position.y < oripos + posi)
                 {
                     transform.Translate(new Vector2(0, 1) * speed * Time.deltaTime);
-                    for(int ix = objs.Count - 1; ix >= 0; ix--)
-                    {
-                        objs[ix].transform.Translate(new Vector2(0, 1) * speed * Time.deltaTime);
-                    }
+                    MoveObjects(new Vector2(0, 1));
                 }
                 else if(posi < 0 && transform.position.y > oripos + posi)
                 {
                     transform.Translate(new Vector2(0, -1) * speed * Time.deltaTime);
-                    for(int ix = objs.Count - 1; ix >= 0; ix--)
-                    {
-                        objs[ix].transform.Translate(new Vector2(0, -1) * speed * Time.deltaTime);
-                    }
+                    MoveObjects(new Vector2(0, -1));
                 }
             }
             else if(trapnumber == 2.5f)
@@ -120,18 +144,12 @@ public class ActiveGimmick : MonoBehaviour
                 if(posi > 0 && transform.position.x < oripos + posi)
                 {
                     transform.Translate(new Vector2(1, 0) * speed * Time.deltaTime);
-                    for(int ix = objs.Count - 1; ix >= 0; ix--)
-                    {
-                        objs[ix].transform.Translate(new Vector2(1, 0) * speed * Time.deltaTime);
-                    }
+                    MoveObjects(new Vector2(1, 0));
                 }
                 else if(posi < 0 && transform.position.x > oripos + posi)
                 {
                     transform.Translate(new Vector2(-1, 0) * speed * Time.deltaTime);
-                    for(int ix = objs.Count - 1; ix >= 0; ix--)
-                    {
-                        objs[ix].transform.Translate(new Vector2(-1, 0) * speed * Time.deltaTime);
-                    }
+                    MoveObjects(new Vector2(-1, 0));
                 }
             }
         }
@@ -142,18 +160,12 @@ public class ActiveGimmick : MonoBehaviour
                 if(transform.position.y < oripos)
                 {
                     transform.Translate(new Vector2(0, 1) * speed * Time.deltaTime);
-                    for(int ix = objs.Count - 1; ix >= 0; ix--)
-                    {
-                        objs[ix].transform.Translate(new Vector2(0, 1) * speed * Time.deltaTime);
-                    }
+                    MoveObjects(new Vector2(0, 1));
                 }
                 else if(transform.position.y > oripos)
                 {
                     transform.Translate(new Vector2(0, -1) * speed * Time.deltaTime);
-                    for(int ix = objs.Count - 1; ix >= 0; ix--)
-                    {
-                        objs[ix].transform.Translate(new Vector2(0, -1) * speed * Time.deltaTime);
-                    }
+                    MoveObjects(new Vector2(0, -1));
                 }
             }
             else if(trapnumber == 1.5f)
@@ -161,18 +173,12 @@ public class ActiveGimmick : MonoBehaviour
                 if(transform.position.x < oripos)
                 {
                     transform.Translate(new Vector2(1, 0) * speed * Time.deltaTime);
-                    for(int ix = objs.Count - 1; ix >= 0; ix--)
-                    {
-                        objs[ix].transform.Translate(new Vector2(1, 0) * speed * Time.deltaTime);
-                    }
+                    MoveObjects(new Vector2(1, 0));
                 }
                 else if(transform.position.x > oripos)
                 {
                     transform.Translate(new Vector2(-1, 0) * speed * Time.deltaTime);
-                    for(int ix = objs.Count - 1; ix >= 0; ix--)
-                    {
-                        objs[ix].transform.Translate(new Vector2(-1, 0) * speed * Time.deltaTime);
-                    }
+                    MoveObjects(new Vector2(-1, 0));
                 }
             }
         }
