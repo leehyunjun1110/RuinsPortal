@@ -25,6 +25,7 @@ public class ActiveGimmick : MonoBehaviour
 
     public void MoveObjects(Vector2 vc2)
     {
+        transform.Translate(vc2 * speed * Time.deltaTime);
         for(int ix = objs.Count - 1; ix >= 0; ix--)
         {
             objs[ix].transform.Translate(vc2 * speed * Time.deltaTime);
@@ -76,7 +77,7 @@ public class ActiveGimmick : MonoBehaviour
             }
             if(ob.GetComponent<BoxCollider2D>() != null)
             {
-                if(none == true && ob.transform.position.x + ob.transform.localScale.x * ob.GetComponent<BoxCollider2D>().size.x / 2 >= transform.position.x - transform.localScale.x * GetComponent<BoxCollider2D>().size.x / 2 && ob.transform.position.x - ob.transform.localScale.x * ob.GetComponent<BoxCollider2D>().size.x / 2 <= transform.position.x + transform.localScale.x * GetComponent<BoxCollider2D>().size.x)
+                if(none == true && ob.transform.position.x + ob.transform.localScale.x * ob.GetComponent<BoxCollider2D>().size.x / 2 >= transform.position.x - transform.localScale.x * GetComponent<BoxCollider2D>().size.x / 2 && ob.transform.position.x - ob.transform.localScale.x * ob.GetComponent<BoxCollider2D>().size.x / 2 <= transform.position.x + transform.localScale.x * GetComponent<BoxCollider2D>().size.x && ob.transform.position.y - ob.transform.localScale.y * ob.GetComponent<BoxCollider2D>().size.y / 2 + 0.1f >= transform.position.y + transform.localScale.y * GetComponent<BoxCollider2D>().size.y / 2)
                 {
                     if(ob != gameObject)
                     {
@@ -85,7 +86,7 @@ public class ActiveGimmick : MonoBehaviour
                 }
                 else if(none == false)
                 {
-                    if(ob.transform.position.x + ob.transform.localScale.x * ob.GetComponent<BoxCollider2D>().size.x / 2 < transform.position.x - transform.localScale.x * GetComponent<BoxCollider2D>().size.x / 2 || ob.transform.position.x - ob.transform.localScale.x * ob.GetComponent<BoxCollider2D>().size.x / 2 > transform.position.x + transform.localScale.x * GetComponent<BoxCollider2D>().size.x)
+                    if(ob.transform.position.x + ob.transform.localScale.x * ob.GetComponent<BoxCollider2D>().size.x / 2 < transform.position.x - transform.localScale.x * GetComponent<BoxCollider2D>().size.x / 2 || ob.transform.position.x - ob.transform.localScale.x * ob.GetComponent<BoxCollider2D>().size.x / 2 > transform.position.x + transform.localScale.x * GetComponent<BoxCollider2D>().size.x || ob.transform.position.y - ob.transform.localScale.y * ob.GetComponent<BoxCollider2D>().size.y / 2 + 0.1f < transform.position.y + transform.localScale.y * GetComponent<BoxCollider2D>().size.y / 2)
                     {
                         for(int ix = objs.Count - 1; ix >= 0; ix--)
                         {
@@ -104,12 +105,10 @@ public class ActiveGimmick : MonoBehaviour
             {
                 if(posi > 0 && transform.position.y < oripos + posi)
                 {
-                    transform.Translate(new Vector2(0, 1) * speed * Time.deltaTime);
                     MoveObjects(new Vector2(0, 1));
                 }
                 else if(posi < 0 && transform.position.y > oripos + posi)
                 {
-                    transform.Translate(new Vector2(0, -1) * speed * Time.deltaTime);
                     MoveObjects(new Vector2(0, -1));
                 }
             }
@@ -117,12 +116,10 @@ public class ActiveGimmick : MonoBehaviour
             {
                 if(posi > 0 && transform.position.x < oripos + posi)
                 {
-                    transform.Translate(new Vector2(1, 0) * speed * Time.deltaTime);
                     MoveObjects(new Vector2(1, 0));
                 }
                 else if(posi < 0 && transform.position.x > oripos + posi)
                 {
-                    transform.Translate(new Vector2(-1, 0) * speed * Time.deltaTime);
                     MoveObjects(new Vector2(-1, 0));
                 }
             }
@@ -130,12 +127,10 @@ public class ActiveGimmick : MonoBehaviour
             {
                 if(posi > 0 && transform.position.y < oripos + posi)
                 {
-                    transform.Translate(new Vector2(0, 1) * speed * Time.deltaTime);
                     MoveObjects(new Vector2(0, 1));
                 }
                 else if(posi < 0 && transform.position.y > oripos + posi)
                 {
-                    transform.Translate(new Vector2(0, -1) * speed * Time.deltaTime);
                     MoveObjects(new Vector2(0, -1));
                 }
             }
@@ -143,12 +138,10 @@ public class ActiveGimmick : MonoBehaviour
             {
                 if(posi > 0 && transform.position.x < oripos + posi)
                 {
-                    transform.Translate(new Vector2(1, 0) * speed * Time.deltaTime);
                     MoveObjects(new Vector2(1, 0));
                 }
                 else if(posi < 0 && transform.position.x > oripos + posi)
                 {
-                    transform.Translate(new Vector2(-1, 0) * speed * Time.deltaTime);
                     MoveObjects(new Vector2(-1, 0));
                 }
             }
@@ -159,12 +152,10 @@ public class ActiveGimmick : MonoBehaviour
             {
                 if(transform.position.y < oripos)
                 {
-                    transform.Translate(new Vector2(0, 1) * speed * Time.deltaTime);
                     MoveObjects(new Vector2(0, 1));
                 }
                 else if(transform.position.y > oripos)
                 {
-                    transform.Translate(new Vector2(0, -1) * speed * Time.deltaTime);
                     MoveObjects(new Vector2(0, -1));
                 }
             }
@@ -172,12 +163,10 @@ public class ActiveGimmick : MonoBehaviour
             {
                 if(transform.position.x < oripos)
                 {
-                    transform.Translate(new Vector2(1, 0) * speed * Time.deltaTime);
                     MoveObjects(new Vector2(1, 0));
                 }
                 else if(transform.position.x > oripos)
                 {
-                    transform.Translate(new Vector2(-1, 0) * speed * Time.deltaTime);
                     MoveObjects(new Vector2(-1, 0));
                 }
             }
