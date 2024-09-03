@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
@@ -9,6 +10,8 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
     private Rigidbody2D rb;
+
+    [SerializeField] private Parallax parallax;
 
     public Transform groundCheck;
     public LayerMask groundLayer;
@@ -26,26 +29,41 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+        animator.SetBool("isGrounded", isGrounded);
+
         float moveInput = Input.GetAxis("Horizontal");
 
         HandleMovement(moveInput);
         HandleJumping();
 
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
-        if (move != true){
-            for(int ix = objs.Count - 1; ix >= 0; ix--)
+        if (move != true)
+        {
+            for (int ix = objs.Count - 1; ix >= 0; ix--)
             {
-                objs[ix].GetComponent<Rigidbody2D>().velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);              
+                objs[ix].GetComponent<Rigidbody2D>().velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
             }
         }
 
-        if (moveInput > 0 && !facingRight)
+        if (Mathf.Abs(moveInput) > 0.1f)
         {
-            Flip();
-        }
-        else if (moveInput < 0 && facingRight)
-        {
-            Flip();
+            if (moveInput > 0)
+            {
+                parallax.MoveRight();
+                if (!facingRight)
+                {
+                    Flip();
+                }
+            }
+            else if (moveInput < 0)
+            {
+                parallax.MoveLeft();
+                if (facingRight)
+                {
+                    Flip();
+                }
+            }
         }
     }
 
@@ -55,35 +73,29 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(moveInput) > 0.1f && isGrounded)
         {
             animator.SetBool("isRunning", true);
+            parallax.MoveUp();
         }
         else
         {
             animator.SetBool("isRunning", false);
+            parallax.MoveDown();
         }
     }
 
-    void HandleJumping()
+void HandleJumping()
+{
+    if (isGrounded)
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
-        animator.SetBool("isGrounded", isGrounded);
-
-        move = true;
-
-        if (isGrounded && Input.GetButtonDown("Jump"))
-        {
-            isJumping = true;
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            animator.SetTrigger("Jump");
-        }
-
-        if (!isGrounded && rb.velocity.y < 0)
-        {
-            if (isJumping)
-            {
-                isJumping = false;
-            }
-        }
+        isJumping = false; // 지면에 닿았을 때 점프 상태를 초기화
     }
+
+    if (isGrounded && !isJumping && Input.GetButtonDown("Jump"))
+    {
+        isJumping = true;
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        animator.SetTrigger("Jump");
+    }
+}
 
     void Flip()
     {
