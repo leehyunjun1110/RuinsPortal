@@ -1,17 +1,18 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-public class PlayerController : MonoBehaviour
+
+public class CharacterControl : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
 
     private bool move = false;
+    private bool jump = false;
 
     private Animator animator;
     private Rigidbody2D rb;
 
-    [SerializeField] private Parallax parallax;
+    private ParallaxMovement parallaxMovement;
 
     public Transform groundCheck;
     public LayerMask groundLayer;
@@ -20,11 +21,20 @@ public class PlayerController : MonoBehaviour
 
     private bool facingRight = true;
     private bool isJumping = false;
+    private float previousY;
+
+    private bool jumpactivate = false;
 
     void Start()
     {
+        previousY = transform.position.y;
+        isJumping = false;
+        isGrounded = true;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
+        var parallaxManager = FindObjectOfType<ParallaxManager>();
+        parallaxMovement = new ParallaxMovement(parallaxManager, 0.1f, 20f); // 초기값은 필요에 따라 변경
     }
 
     void Update()
@@ -36,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
         HandleMovement(moveInput);
         HandleJumping();
+        IsJUMP();
 
         rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
         if (move != true)
@@ -50,7 +61,7 @@ public class PlayerController : MonoBehaviour
         {
             if (moveInput > 0)
             {
-                parallax.MoveRight();
+                parallaxMovement.MoveRight();
                 if (!facingRight)
                 {
                     Flip();
@@ -58,12 +69,16 @@ public class PlayerController : MonoBehaviour
             }
             else if (moveInput < 0)
             {
-                parallax.MoveLeft();
+                parallaxMovement.MoveLeft();
                 if (facingRight)
                 {
                     Flip();
                 }
             }
+        }
+        else if (Mathf.Abs(moveInput) == 0)
+        {
+            parallaxMovement.Stop();
         }
     }
 
@@ -73,29 +88,71 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(moveInput) > 0.1f && isGrounded)
         {
             animator.SetBool("isRunning", true);
-            parallax.MoveUp();
         }
         else
         {
             animator.SetBool("isRunning", false);
-            parallax.MoveDown();
         }
     }
 
-void HandleJumping()
-{
-    if (isGrounded)
+    void IsJUMP()
     {
-        isJumping = false; // 지면에 닿았을 때 점프 상태를 초기화
+        float currentY = transform.position.y;
+        float jumpSpeed = Mathf.Abs(rb.velocity.y);
+
+        if (currentY > previousY)
+        {
+            if (!isJumping)
+            {
+                Debug.Log("점프 시작");
+                isJumping = true;
+                parallaxMovement.MoveUp(jumpSpeed);
+            }
+            else
+            {
+                Debug.Log("점프중입니다");
+                parallaxMovement.MoveUp(jumpSpeed);
+            }
+        }
+        else if (currentY < previousY)
+        {
+            if (isJumping)
+            {
+                Debug.Log("하강중입니다");
+                parallaxMovement.MoveDown(jumpSpeed);
+            }
+        }
+        else if (currentY == previousY && isGrounded)
+        {
+            if (isJumping)
+            {
+                Debug.Log("점프 종료");
+                isJumping = false;
+                parallaxMovement.Stop();
+            }
+            else
+            {
+                Debug.Log("정지 상태 유지");
+            }
+        }
+
+        previousY = currentY;
     }
 
-    if (isGrounded && !isJumping && Input.GetButtonDown("Jump"))
+    void HandleJumping()
     {
-        isJumping = true;
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        animator.SetTrigger("Jump");
+        if (isGrounded)
+        {
+            isJumping = false;
+        }
+
+        if (isGrounded && !isJumping && Input.GetButtonDown("Jump"))
+        {
+            isJumping = true;
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            animator.SetTrigger("Jump");
+        }
     }
-}
 
     void Flip()
     {
@@ -108,16 +165,16 @@ void HandleJumping()
     void OnCollisionEnter2D(Collision2D other)
     {
         bool none = true;
-        for(int ix = objs.Count - 1; ix >= 0; ix--)
+        for (int ix = objs.Count - 1; ix >= 0; ix--)
         {
-            if(objs[ix] == other.gameObject)
+            if (objs[ix] == other.gameObject)
             {
                 none = false;
             }
         }
-        if(none == true && other.gameObject.GetComponent<Rigidbody2D>() != null && other.gameObject.GetComponent<Rigidbody2D>().gravityScale != 0 && other.gameObject.GetComponent<BoxCollider2D>() != null)
+        if (none && other.gameObject.GetComponent<Rigidbody2D>() != null && other.gameObject.GetComponent<Rigidbody2D>().gravityScale != 0 && other.gameObject.GetComponent<BoxCollider2D>() != null)
         {
-            if(other.transform.position.y - other.transform.localScale.y * other.gameObject.GetComponent<BoxCollider2D>().size.y / 2 + 0.05f >= transform.position.y + transform.localScale.y * GetComponent<BoxCollider2D>().size.y / 2)
+            if (other.transform.position.y - other.transform.localScale.y * other.gameObject.GetComponent<BoxCollider2D>().size.y / 2 + 0.05f >= transform.position.y + transform.localScale.y * GetComponent<BoxCollider2D>().size.y / 2)
             {
                 objs.Add(other.gameObject);
             }
@@ -126,9 +183,9 @@ void HandleJumping()
 
     void OnCollisionExit2D(Collision2D other)
     {
-        for(int ix = objs.Count - 1; ix >= 0; ix--)
+        for (int ix = objs.Count - 1; ix >= 0; ix--)
         {
-            if(objs[ix] == other.gameObject)
+            if (objs[ix] == other.gameObject)
             {
                 objs.RemoveAt(ix);
             }

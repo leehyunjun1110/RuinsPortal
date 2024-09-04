@@ -12,6 +12,8 @@ public class interact : MonoBehaviour
     [SerializeField] private Transform targetParent;
     [SerializeField] private float itemRange = 1.5f;
 
+    public GameObject rayPoint;
+
     private float _lastCheckTime;
     private GameObject _curObj;
     private GameObject _pickedObj;
@@ -52,8 +54,8 @@ public class interact : MonoBehaviour
             if (Time.time - _lastCheckTime >= _checkRate)
             {
                 _lastCheckTime = Time.time;
-                RaycastHit2D hitRight = Physics2D.Raycast(transform.position, Vector2.right, _maxDistance, _layerMask);
-                RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, Vector2.left, _maxDistance, _layerMask);
+                RaycastHit2D hitRight = Physics2D.Raycast(rayPoint.transform.position, Vector2.right, _maxDistance, _layerMask);
+                RaycastHit2D hitLeft = Physics2D.Raycast(rayPoint.transform.position, Vector2.left, _maxDistance, _layerMask);
                 if (hitRight.collider != null && !_picked)
                 {
                     _curObj = hitRight.collider.gameObject;
