@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &17770821
 Transform:
   m_ObjectHideFlags: 0
@@ -474,6 +474,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 486428, guid: 9ec82eb20cc660043be910efe44f372c, type: 3}
   m_PrefabInstance: {fileID: 1743415399}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &227238489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 227238490}
+  m_Layer: 6
+  m_Name: RayPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &227238490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227238489}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 252774087}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &243266720 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 486428, guid: 9ec82eb20cc660043be910efe44f372c, type: 3}
@@ -679,6 +710,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1824098690}
+  - {fileID: 227238490}
   m_Father: {fileID: 1326547633}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &252774088
@@ -701,7 +733,7 @@ MonoBehaviour:
     m_Bits: 128
   targetParent: {fileID: 1326547633}
   itemRange: 1
-  rayPoint: {fileID: 0}
+  rayPoint: {fileID: 227238489}
 --- !u!1001 &396581226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1533,7 +1565,7 @@ Transform:
   m_GameObject: {fileID: 740206550}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 29.51, y: 3.21, z: 0}
+  m_LocalPosition: {x: -1, y: -3.5, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1731,7 +1763,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &845031396
 Transform:
   m_ObjectHideFlags: 0
@@ -1900,8 +1932,39 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.01}
+  m_Size: {x: 0.34, y: 0.01}
   m_EdgeRadius: 0
+--- !u!1 &962845771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 962845772}
+  m_Layer: 6
+  m_Name: RayPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &962845772
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962845771}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1307499965}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &991027605
 GameObject:
   m_ObjectHideFlags: 0
@@ -2236,7 +2299,7 @@ MonoBehaviour:
     m_Bits: 128
   targetParent: {fileID: 845031396}
   itemRange: 1
-  rayPoint: {fileID: 0}
+  rayPoint: {fileID: 1977108417}
 --- !u!114 &1076133353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2415,6 +2478,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1097732673}
+  - {fileID: 1977108418}
   m_Father: {fileID: 845031396}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1097732672
@@ -3021,6 +3085,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2082679385}
+  - {fileID: 962845772}
   m_Father: {fileID: 17770821}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1307499966
@@ -3043,7 +3108,7 @@ MonoBehaviour:
     m_Bits: 128
   targetParent: {fileID: 17770821}
   itemRange: 1
-  rayPoint: {fileID: 0}
+  rayPoint: {fileID: 962845771}
 --- !u!1 &1310759310
 GameObject:
   m_ObjectHideFlags: 0
@@ -3193,7 +3258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1326547633
 Transform:
   m_ObjectHideFlags: 0
@@ -3491,8 +3556,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e72b935f8594ac14d9b95e0914f07684, type: 2}
-  m_sharedMaterial: {fileID: 8673586482202855211, guid: e72b935f8594ac14d9b95e0914f07684, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ecfc9c840502c3e41a367958fd724ef5, type: 2}
+  m_sharedMaterial: {fileID: 6437210725442997818, guid: ecfc9c840502c3e41a367958fd724ef5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4075,7 +4140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1602131564}
   m_Layer: 6
-  m_Name: GameObject
+  m_Name: RayPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4090,7 +4155,7 @@ Transform:
   m_GameObject: {fileID: 1602131563}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.104, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4637,6 +4702,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 486428, guid: 9ec82eb20cc660043be910efe44f372c, type: 3}
   m_PrefabInstance: {fileID: 1243665579}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1977108417
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1977108418}
+  m_Layer: 6
+  m_Name: RayPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1977108418
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1977108417}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1076133358}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1978949856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5057,7 +5153,7 @@ Transform:
   m_GameObject: {fileID: 2082679384}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.4, z: 0}
+  m_LocalPosition: {x: 0, y: -0.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
