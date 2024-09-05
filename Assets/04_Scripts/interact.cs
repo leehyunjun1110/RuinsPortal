@@ -29,7 +29,7 @@ public class interact : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(UnityEngine.KeyCode.E))
         {
             if (_picked)
             {
