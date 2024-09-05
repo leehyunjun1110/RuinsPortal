@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &17770821
 Transform:
   m_ObjectHideFlags: 0
@@ -549,7 +549,7 @@ MonoBehaviour:
   groundCheck: {fileID: 1824098690}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 200
   objs: []
 --- !u!50 &252774083
 Rigidbody2D:
@@ -1763,7 +1763,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &845031396
 Transform:
   m_ObjectHideFlags: 0
@@ -2317,7 +2317,7 @@ MonoBehaviour:
   groundCheck: {fileID: 1097732673}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 200
   objs: []
 --- !u!50 &1076133354
 Rigidbody2D:
@@ -2914,7 +2914,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307499959}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0edf01a2ca6812342995f6d1f5489788, type: 3}
   m_Name: 
@@ -2924,7 +2924,7 @@ MonoBehaviour:
   groundCheck: {fileID: 2082679385}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 200
   objs: []
 --- !u!50 &1307499961
 Rigidbody2D:
@@ -3095,12 +3095,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307499959}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebade7829a746824994d393384c187ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _intText: {fileID: 0}
+  _intText: {fileID: 1460592399}
   _checkRate: 0.05
   _maxDistance: 1.5
   _layerMask:
@@ -3258,7 +3258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1326547633
 Transform:
   m_ObjectHideFlags: 0
