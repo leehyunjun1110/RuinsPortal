@@ -66,7 +66,7 @@ public class KeyCode : MonoBehaviour
             GameObject[] allobjects = FindObjectsOfType<GameObject>();
             foreach(GameObject ob in allobjects)
             {
-                if(ob.GetComponent<KeyDoor>() != null)
+                if(ob.GetComponent<KeyDoor>() != null && ob.GetComponent<KeyDoor>().open == false)
                 {
                     if(Vector2.Distance(new Vector2(ob.transform.position.x, ob.transform.position.y), new Vector2(transform.position.x, transform.position.y)) <= 2.2f)
                     {
