@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public interface IParallaxMover
 {
@@ -22,7 +23,8 @@ public class ParallaxManager : MonoBehaviour, IParallaxMover
 
     public void Move(Vector2 direction, float speed)
     {
-        currentOffset += direction * speed * Time.deltaTime;
+        Vector2 targetOffset = currentOffset + direction * speed * Time.deltaTime;
+        currentOffset = Vector2.Lerp(currentOffset, targetOffset, 0.1f);
         material.SetTextureOffset("_MainTex", currentOffset);
     }
 

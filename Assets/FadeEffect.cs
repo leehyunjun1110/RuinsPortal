@@ -5,10 +5,10 @@ using System.Collections;
 
 public class FadeEffect : MonoBehaviour
 {
-    public Image fadeImage; // Canvas에 있는 검정색 Image
-    public float fadeDuration = 1f; // 페이드 시간
-    public string nextSceneName; // 다음 씬의 이름
-    public Collider targetCollider; // 특정 오브젝트의 콜라이더
+    [SerializeField] private Image fadeImage; // Canvas에 있는 검정색 Image
+    [SerializeField] private float fadeDuration = 1f; // 페이드 시간
+    [SerializeField] private string nextSceneName; // 다음 씬의 이름
+    [SerializeField] private Collider targetCollider; // 특정 오브젝트의 콜라이더
 
     private bool isFadingIn = true;
     private bool isFadingOut = false;

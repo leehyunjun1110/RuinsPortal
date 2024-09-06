@@ -212,7 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 83142603}
   fadeDuration: 1
-  nextSceneName: Test
+  nextSceneName: MatchingScene
   targetCollider: {fileID: 1567000786}
 --- !u!65 &70866592
 BoxCollider:
