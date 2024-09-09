@@ -11,7 +11,7 @@ public class ActiveButton : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(pressing == false)
+        if(other.GetComponent<Rigidbody2D>() != null && pressing == false)
         {
             pressing = true;
             presobject = other.gameObject;
@@ -22,7 +22,7 @@ public class ActiveButton : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if(pressing == true && presobject == other.gameObject)
+        if(other.GetComponent<Rigidbody2D>() != null && pressing == true && presobject == other.gameObject)
         {
             pressing = false;
             presobject = null;
